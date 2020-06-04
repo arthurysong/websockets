@@ -14,7 +14,6 @@ class MessagesChannel < ApplicationCable::Channel
   def create_message(data)
     message = Message.create(content: data["content"])
     
-    messages = Message.all
-    ActionCable.server.broadcast("messages", {type: "current_messages", messages: messages})
+    ActionCable.server.broadcast("messages", {type: "new_message", message: message})
   end
 end
